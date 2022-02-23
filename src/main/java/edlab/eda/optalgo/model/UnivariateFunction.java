@@ -30,7 +30,7 @@ public abstract class UnivariateFunction {
     for (int i = 0; i < retval.length; i++) {
 
       try {
-        retval[i] = this.range[i].getRandom();
+        retval[i] = this.range[i].getRandomValue();
       } catch (final Exception e) {
         throw new NoLowerAndUpperBoundedRange(i);
       }
@@ -46,7 +46,7 @@ public abstract class UnivariateFunction {
     for (int i = 0; i < retval.length; i++) {
 
       try {
-        retval[i] = this.range[i].getRandom();
+        retval[i] = this.range[i].getRandomValue();
       } catch (final Exception e) {
         throw new NoLowerAndUpperBoundedRange(i);
       }

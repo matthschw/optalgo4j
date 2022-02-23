@@ -34,7 +34,7 @@ public class NelderMead extends UnivariateOptimizer {
   }
 
   @Override
-  public void run() {
+  public UnivariateOptimizer run() {
 
     if (this.checkControlParameters()) {
 
@@ -51,7 +51,7 @@ public class NelderMead extends UnivariateOptimizer {
           simplex[i] = this.func.getRandomPosition();
         } catch (final NoLowerAndUpperBoundedRange e) {
           e.printStackTrace();
-          return;
+          return null;
         }
       }
 
@@ -60,7 +60,7 @@ public class NelderMead extends UnivariateOptimizer {
           fun[i] = this.func.evaluate(simplex[i]);
           this.numOfEvals++;
         } catch (final NonMatchingDesignSpace e) {
-          return;
+          return null;
         }
       }
 
@@ -101,9 +101,9 @@ public class NelderMead extends UnivariateOptimizer {
                 fun[i] = this.func.evaluate(simplex[i]);
                 this.numOfEvals++;
               } catch (final NoLowerAndUpperBoundedRange e) {
-                return;
-              } catch (NonMatchingDesignSpace e) {
-                return;
+                return null;
+              } catch (final NonMatchingDesignSpace e) {
+                return null;
               }
             }
           }
@@ -147,7 +147,7 @@ public class NelderMead extends UnivariateOptimizer {
           this.numOfEvals++;
         } catch (final NonMatchingDesignSpace e) {
           System.out.println(e);
-          return;
+          return null;
         }
 
         if (fun[0].compareTo(fun_reflection) > 0) {
@@ -166,7 +166,7 @@ public class NelderMead extends UnivariateOptimizer {
             fun_expansion = this.func.evaluate(expansion);
             this.numOfEvals++;
           } catch (final NonMatchingDesignSpace e) {
-            return;
+            return null;
           }
 
           if (fun_reflection.compareTo(fun_expansion) > 0) {
@@ -230,7 +230,7 @@ public class NelderMead extends UnivariateOptimizer {
             fun_contraction = this.func.evaluate(contraction);
             this.numOfEvals++;
           } catch (final NonMatchingDesignSpace e) {
-            return;
+            return null;
           }
 
           if (fun[this.func.getNoOfInputs()].compareTo(fun_contraction) > 0) {
@@ -259,7 +259,7 @@ public class NelderMead extends UnivariateOptimizer {
                 fun[i] = this.func.evaluate(simplex[i]);
                 this.numOfEvals++;
               } catch (final NonMatchingDesignSpace e) {
-                return;
+                return null;
               }
             }
 
@@ -278,8 +278,10 @@ public class NelderMead extends UnivariateOptimizer {
 
     } else {
       System.err.println("Control Parameters are invalid");
-      return;
+      return null;
     }
+
+    return this;
   }
 
   public BigDecimal getAlpha() {

@@ -4,7 +4,7 @@ public class OptimizationHelpers {
 
   public static String doubleArrayToString(final double[] vals) {
 
-    StringBuilder res = new StringBuilder("[");
+    final StringBuilder res = new StringBuilder("[");
 
     for (int i = 0; i < vals.length; i++) {
       if (i > 0) {

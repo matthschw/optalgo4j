@@ -48,14 +48,11 @@ class NelderMeadTest {
 
         if (error.compareTo(ERROR) > 0) {
           fail("No convergence for Himmelbau in iteration " + i);
-        } else {
-
-          if (VERBOSE) {
-            System.out.println("\nResult for \"Himmelblau\" achieved:");
-            for (int j = 0; j < nm.getResult().length; j++) {
-              System.out.println("x_" + j + "="
-                  + nm.getResult()[j].round(MathContext.DECIMAL32));
-            }
+        } else if (VERBOSE) {
+          System.out.println("\nResult for \"Himmelblau\" achieved:");
+          for (int j = 0; j < nm.getResult().length; j++) {
+            System.out.println("x_" + j + "="
+                + nm.getResult()[j].round(MathContext.DECIMAL32));
           }
         }
 
@@ -86,14 +83,11 @@ class NelderMeadTest {
 
         if (error.compareTo(ERROR) > 0) {
           fail("No convergence for Rastrigin in iteration " + i);
-        } else {
-
-          if (VERBOSE) {
-            System.out.println("\nResult for \"Rastrigin\" achieved:");
-            for (int j = 0; j < nm.getResult().length; j++) {
-              System.out.println("x_" + j + "="
-                  + nm.getResult()[j].round(MathContext.DECIMAL32));
-            }
+        } else if (VERBOSE) {
+          System.out.println("\nResult for \"Rastrigin\" achieved:");
+          for (int j = 0; j < nm.getResult().length; j++) {
+            System.out.println("x_" + j + "="
+                + nm.getResult()[j].round(MathContext.DECIMAL32));
           }
         }
       } catch (final NonMatchingDesignSpace e) {
@@ -123,14 +117,11 @@ class NelderMeadTest {
 
         if (error.compareTo(ERROR) > 0) {
           fail("No convergence for Rosenbrock in iteration " + i);
-        } else {
-
-          if (VERBOSE) {
-            System.out.println("\nResult for \"Rosenbrock\" achieved:");
-            for (int j = 0; j < nm.getResult().length; j++) {
-              System.out.println("x_" + j + "="
-                  + nm.getResult()[j].round(MathContext.DECIMAL32));
-            }
+        } else if (VERBOSE) {
+          System.out.println("\nResult for \"Rosenbrock\" achieved:");
+          for (int j = 0; j < nm.getResult().length; j++) {
+            System.out.println("x_" + j + "="
+                + nm.getResult()[j].round(MathContext.DECIMAL32));
           }
         }
       } catch (final NonMatchingDesignSpace e) {

@@ -25,7 +25,8 @@ public abstract class ParameterRange {
    * @throws NoLowerAndUpperBoundedRange when no lower and upper bound is
    *                                     specified for a range
    */
-  public abstract BigDecimal getRandom() throws NoLowerAndUpperBoundedRange;
+  public abstract BigDecimal getRandomValue()
+      throws NoLowerAndUpperBoundedRange;
 
   /**
    * Check if <code>value</code> is a valid value in the range

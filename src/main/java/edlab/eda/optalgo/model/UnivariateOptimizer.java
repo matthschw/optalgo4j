@@ -17,7 +17,8 @@ public abstract class UnivariateOptimizer {
   protected boolean verbose = false;
   protected ParameterRange[] range;
 
-  public UnivariateOptimizer(final UnivariateFunction func, final int maxNumOfEvals) {
+  public UnivariateOptimizer(final UnivariateFunction func,
+      final int maxNumOfEvals) {
     this.func = func;
     this.maxNumOfEvals = maxNumOfEvals;
     this.numOfEvals = 0;
@@ -33,7 +34,8 @@ public abstract class UnivariateOptimizer {
     this.range = new ParameterRange[func.getNoOfInputs()];
   }
 
-  public UnivariateOptimizer(final UnivariateFunction func, final BigDecimal maxError) {
+  public UnivariateOptimizer(final UnivariateFunction func,
+      final BigDecimal maxError) {
     this.func = func;
     this.numOfEvals = 0;
     this.maxError = maxError;
@@ -41,8 +43,8 @@ public abstract class UnivariateOptimizer {
     this.range = new ParameterRange[func.getNoOfInputs()];
   }
 
-  public UnivariateOptimizer(final UnivariateFunction func, final int maxNumOfEvals,
-      final BigDecimal maxError) {
+  public UnivariateOptimizer(final UnivariateFunction func,
+      final int maxNumOfEvals, final BigDecimal maxError) {
     this.func = func;
     this.maxNumOfEvals = maxNumOfEvals;
     this.numOfEvals = 0;
@@ -73,7 +75,7 @@ public abstract class UnivariateOptimizer {
   public void setMaxError(final BigDecimal maxError) {
     this.maxError = maxError;
   }
-  
+
   public BigDecimal getError() {
     return this.error;
   }
@@ -82,6 +84,6 @@ public abstract class UnivariateOptimizer {
     this.verbose = verbose;
   }
 
-  public abstract void run();
+  public abstract UnivariateOptimizer run();
 
 }

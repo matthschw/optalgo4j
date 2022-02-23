@@ -29,8 +29,8 @@ public class DiscreteParameterRange extends ParameterRange {
    * @param grid  discrete step
    * @return discrete parameter range
    */
-  public static DiscreteParameterRange getLowerBoundedRange(final BigDecimal lower,
-      final BigDecimal grid) {
+  public static DiscreteParameterRange getLowerBoundedRange(
+      final BigDecimal lower, final BigDecimal grid) {
 
     if ((lower instanceof BigDecimal) && (grid instanceof BigDecimal)
         && (grid.compareTo(BigDecimal.ZERO) > 0)) {
@@ -47,8 +47,8 @@ public class DiscreteParameterRange extends ParameterRange {
    * @param grid  discrete step
    * @return discrete parameter range
    */
-  public static DiscreteParameterRange getUpperBoundedRange(final BigDecimal upper,
-      final BigDecimal grid) {
+  public static DiscreteParameterRange getUpperBoundedRange(
+      final BigDecimal upper, final BigDecimal grid) {
 
     if ((upper instanceof BigDecimal) && (grid instanceof BigDecimal)
         && (grid.compareTo(BigDecimal.ZERO) > 0)) {
@@ -71,7 +71,8 @@ public class DiscreteParameterRange extends ParameterRange {
       final BigDecimal upper, final BigDecimal grid) {
 
     if ((lower instanceof BigDecimal) && (upper instanceof BigDecimal)
-        && (grid instanceof BigDecimal) && (grid.compareTo(BigDecimal.ZERO) > 0)) {
+        && (grid instanceof BigDecimal)
+        && (grid.compareTo(BigDecimal.ZERO) > 0)) {
 
       if (lower.compareTo(upper) < 0) {
         return new DiscreteParameterRange(lower, upper, grid);
@@ -114,12 +115,12 @@ public class DiscreteParameterRange extends ParameterRange {
   }
 
   @Override
-  public BigDecimal getRandom() throws NoLowerAndUpperBoundedRange {
+  public BigDecimal getRandomValue() throws NoLowerAndUpperBoundedRange {
 
     if ((this.lower != null) && (this.upper != null)) {
 
-      return this.getClosestValidValue(this.lower
-          .add(this.upper.subtract(this.lower).multiply(new BigDecimal(Math.random()))));
+      return this.getClosestValidValue(this.lower.add(this.upper
+          .subtract(this.lower).multiply(new BigDecimal(Math.random()))));
 
     } else {
       throw new NoLowerAndUpperBoundedRange();

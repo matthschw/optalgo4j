@@ -14,7 +14,7 @@ public class Rosenbrock extends DifferntiableUnivariateFunction {
 
     for (int i = 0; i < n; i++) {
       this.range[i] = ContinuousParameterRange
-          .getParameterRange(new BigDecimal("-10"), new BigDecimal("10"));
+          .getParameterRange(new BigDecimal("-5"), new BigDecimal("5"));
     }
   }
 
@@ -29,7 +29,7 @@ public class Rosenbrock extends DifferntiableUnivariateFunction {
       BigDecimal first;
       BigDecimal second;
 
-      for (int i = 0; i < this.noOfInputs - 1; i++) {
+      for (int i = 0; i < (this.noOfInputs - 1); i++) {
 
         first = vals[i + 1].subtract(vals[i].pow(2)).pow(2)
             .multiply(new BigDecimal("100"));

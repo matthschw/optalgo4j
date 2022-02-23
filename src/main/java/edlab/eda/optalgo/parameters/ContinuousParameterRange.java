@@ -99,7 +99,7 @@ public class ContinuousParameterRange extends ParameterRange {
   }
 
   @Override
-  public BigDecimal getRandom() {
+  public BigDecimal getRandomValue() {
 
     if ((this.lower != null) && (this.upper != null)) {
 

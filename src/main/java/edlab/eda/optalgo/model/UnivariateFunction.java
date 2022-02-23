@@ -38,33 +38,19 @@ public abstract class UnivariateFunction {
 
     return retval;
   }
-  
-  public BigDecimal[] getRandomVelocity() throws NoLowerAndUpperBoundedRange {
 
-    final BigDecimal[] retval = new BigDecimal[this.noOfInputs];
-
-    for (int i = 0; i < retval.length; i++) {
-
-      try {
-        retval[i] = this.range[i].getRandomValue();
-      } catch (final Exception e) {
-        throw new NoLowerAndUpperBoundedRange(i);
-      }
-    }
-
-    return retval;
-  }
-
-  public boolean setParameterRange(final int index, final ParameterRange range) throws NonMatchingDesignSpace {
+  public boolean setParameterRange(final int index, final ParameterRange range)
+      throws NonMatchingDesignSpace {
     if ((index >= 0) && (index < this.range.length)) {
       this.range[index] = range;
       return true;
     } else {
-      throw new NonMatchingDesignSpace(index,  this.range.length);
+      throw new NonMatchingDesignSpace(index, this.range.length);
     }
   }
 
-  public ParameterRange getParameterRange(final int index) throws NonMatchingDesignSpace {
+  public ParameterRange getParameterRange(final int index)
+      throws NonMatchingDesignSpace {
     if ((index >= 0) && (index < this.range.length)) {
       return this.range[index];
     } else {
@@ -72,10 +58,29 @@ public abstract class UnivariateFunction {
     }
   }
 
+  public boolean isValid(final BigDecimal[] values) throws NonMatchingDesignSpace {
+
+    if (values.length == this.getNoOfInputs()) {
+
+      for (int i = 0; i < values.length; i++) {
+
+        if (this.range[i] != null) {
+          if (!this.range[i].isValid(values[i])) {
+            return false;
+          }
+        }
+      }
+      return true;
+    } else {
+      throw new NonMatchingDesignSpace(values.length, this.getNoOfInputs());
+    }
+  }
+
   public BigDecimal[] getClosestValidValues(final BigDecimal[] values)
       throws NonMatchingDesignSpace {
 
     if (values.length == this.getNoOfInputs()) {
+
       final BigDecimal[] retval = new BigDecimal[values.length];
 
       for (int i = 0; i < values.length; i++) {

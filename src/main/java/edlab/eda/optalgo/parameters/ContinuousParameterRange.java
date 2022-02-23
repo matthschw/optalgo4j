@@ -10,7 +10,8 @@ public class ContinuousParameterRange extends ParameterRange {
   private BigDecimal lower = null;
   private BigDecimal upper = null;
 
-  private ContinuousParameterRange(final BigDecimal lower, final BigDecimal upper) {
+  private ContinuousParameterRange(final BigDecimal lower,
+      final BigDecimal upper) {
     this.lower = lower;
     this.upper = upper;
   }
@@ -56,8 +57,8 @@ public class ContinuousParameterRange extends ParameterRange {
    * @param upper upper bound of the range
    * @return continuous parameter range
    */
-  public static ContinuousParameterRange getParameterRange(final BigDecimal lower,
-      final BigDecimal upper) {
+  public static ContinuousParameterRange getParameterRange(
+      final BigDecimal lower, final BigDecimal upper) {
 
     if ((lower instanceof BigDecimal) && (upper instanceof BigDecimal)) {
 
@@ -94,7 +95,8 @@ public class ContinuousParameterRange extends ParameterRange {
     } else if ((this.lower != null) && (this.upper == null)) {
       return value.compareTo(this.lower) >= 0;
     } else {
-      return (value.compareTo(this.lower) >= 0) && (value.compareTo(this.upper) <= 0);
+      return (value.compareTo(this.lower) >= 0)
+          && (value.compareTo(this.upper) <= 0);
     }
   }
 
@@ -103,13 +105,11 @@ public class ContinuousParameterRange extends ParameterRange {
 
     if ((this.lower != null) && (this.upper != null)) {
 
-      return this.lower
-          .add(this.upper.subtract(this.lower).multiply(new BigDecimal(Math.random())));
+      return this.lower.add(this.upper.subtract(this.lower)
+          .multiply(new BigDecimal(Math.random())));
 
     } else {
       return null;
     }
-
   }
-
 }

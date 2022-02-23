@@ -82,7 +82,7 @@ class NelderMeadTest {
         error = rastrigin.evaluate(nm.getResult());
 
         if (error.compareTo(ERROR) > 0) {
-          fail("No convergence for Rastrigin in iteration " + i);
+          fail("No convergence for \"Rastrigin\" in iteration " + i);
         } else if (VERBOSE) {
           System.out.println("\nResult for \"Rastrigin\" achieved:");
           for (int j = 0; j < nm.getResult().length; j++) {

@@ -13,7 +13,7 @@ public class SimulatedAnnealing extends UnivariateOptimizer{
   }
 
   @Override
-  public void run() {
+  public SimulatedAnnealing run() {
     
     try {
       
@@ -27,7 +27,7 @@ public class SimulatedAnnealing extends UnivariateOptimizer{
     
     
     // TODO Auto-generated method stub
-    
+    return this;
   }
 
 }

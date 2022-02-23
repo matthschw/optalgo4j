@@ -50,8 +50,6 @@ public class ParticleSwarmOptimization extends UnivariateOptimizer {
       }
 
       this.particles.add(particle);
-
-      //particle.evaluate();
     }
 
     return this;
@@ -65,16 +63,14 @@ public class ParticleSwarmOptimization extends UnivariateOptimizer {
       this.numOfEvals++;
 
       if (retval.compareTo(this.error) < 0) {
-        this.result = position;
-        this.error = retval;
 
-        System.out.println("Best:" + this.error.round(MathContext.DECIMAL32));
-
-        for (BigDecimal x : result) {
-          System.out.print(x.round(MathContext.DECIMAL32));
-          System.out.print(" ");
+        if (this.verbose) {
+          System.out.println(
+              "Update best point :" + this.error.round(MathContext.DECIMAL32));
         }
-        System.out.println(" ");
+
+        this.result = ParticleSwarmOptimization.copy(position);
+        this.error = retval;
       }
 
       return retval;
@@ -100,6 +96,14 @@ public class ParticleSwarmOptimization extends UnivariateOptimizer {
     return this.social;
   }
 
+  boolean isValid(BigDecimal[] pos) {
+    try {
+      return this.func.isValid(pos);
+    } catch (NonMatchingDesignSpace e) {
+      return false;
+    }
+  }
+
   BigDecimal[] clip(BigDecimal[] pos) {
     try {
       return this.func.getClosestValidValues(pos);
@@ -118,13 +122,22 @@ public class ParticleSwarmOptimization extends UnivariateOptimizer {
     while ((this.error.compareTo(this.maxError) > 0)
         && (this.numOfEvals < this.maxNumOfEvals)) {
 
-      System.err.println("\nNew iter:" + this.numOfEvals);
-
       for (final Particle particle : this.particles) {
         particle.updateVelocity().updatePosition().evaluate();
       }
     }
 
     return this;
+  }
+
+  static BigDecimal[] copy(BigDecimal[] array) {
+
+    BigDecimal[] retval = new BigDecimal[array.length];
+
+    for (int i = 0; i < retval.length; i++) {
+      retval[i] = new BigDecimal(array[i].toString());
+    }
+
+    return retval;
   }
 }

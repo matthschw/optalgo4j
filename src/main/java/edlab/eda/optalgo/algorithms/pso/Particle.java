@@ -1,44 +1,36 @@
 package edlab.eda.optalgo.algorithms.pso;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 
 public class Particle implements Comparable<Particle> {
 
   private final ParticleSwarmOptimization algo;
 
   private BigDecimal[] position;
-  private BigDecimal[] bestPosition;
   private final BigDecimal[] velocity;
 
+  private BigDecimal[] bestPosition;
   private BigDecimal error;
 
-  public Particle(final ParticleSwarmOptimization algo,
-      final BigDecimal[] position, final BigDecimal[] velocity) {
+  Particle(final ParticleSwarmOptimization algo, final BigDecimal[] position,
+      final BigDecimal[] velocity) {
     this.algo = algo;
-    this.position = position;
-    this.bestPosition = position;
-    this.velocity = velocity;
+    this.position = ParticleSwarmOptimization.copy(position);
+    this.bestPosition = ParticleSwarmOptimization.copy(position);
+    this.velocity = ParticleSwarmOptimization.copy(velocity);
     this.error = new BigDecimal(Double.MAX_VALUE);
   }
 
-  public Particle(final ParticleSwarmOptimization algo,
-      final BigDecimal[] position) {
+  Particle(final ParticleSwarmOptimization algo, final BigDecimal[] position) {
     this.algo = algo;
-    this.position = position;
-    this.bestPosition = position;
-    this.velocity = new BigDecimal[position.length];
 
-    System.out.print("POS ");
+    this.position = ParticleSwarmOptimization.copy(position);
+    this.bestPosition = ParticleSwarmOptimization.copy(position);
+    this.velocity = new BigDecimal[position.length];
 
     for (int i = 0; i < this.velocity.length; i++) {
       this.velocity[i] = BigDecimal.ZERO;
-
-      System.out.print(this.position[i].round(MathContext.DECIMAL32));
-      System.out.print(" ");
-
     }
-    System.out.println(" ");
 
     this.error = new BigDecimal(Double.MAX_VALUE);
   }
@@ -48,15 +40,18 @@ public class Particle implements Comparable<Particle> {
     BigDecimal elem1;
     BigDecimal elem2;
 
-    for (int i = 0; i < this.velocity.length; i++) {
+    BigDecimal r1, r2;
+    
+    r1 = new BigDecimal(Math.random());
+    r2 = new BigDecimal(Math.random());
 
+    for (int i = 0; i < this.velocity.length; i++) {
+      
       elem1 = this.bestPosition[i].subtract(this.position[i])
-          .multiply(this.algo.getCognitive())
-          .multiply(new BigDecimal(Math.random()));
+          .multiply(this.algo.getCognitive()).multiply(r1);
 
       elem2 = this.algo.getGlobalBest()[i].subtract(this.position[i])
-          .multiply(this.algo.getSocial())
-          .multiply(new BigDecimal(Math.random()));
+          .multiply(this.algo.getSocial()).multiply(r2);
 
       this.velocity[i] = this.algo.getMomentum().multiply(this.velocity[i])
           .add(elem1).add(elem2);
@@ -67,15 +62,11 @@ public class Particle implements Comparable<Particle> {
 
   Particle evaluate() {
 
-    final BigDecimal newError = this.algo.evaluate(this.position);
+    final BigDecimal new_error = this.algo.evaluate(this.position);
 
-    // System.out.println("1X:" + newError.round(MathContext.DECIMAL32)+ "-"
-    // + this.error.round(MathContext.DECIMAL32));
-    if (newError.compareTo(this.error) < 0) {
-      // System.out.println("2X:" + newError.round(MathContext.DECIMAL32) + "-"
-      // + this.error.round(MathContext.DECIMAL32));
-      this.error = newError;
-      this.bestPosition = this.position;
+    if (new_error.compareTo(this.error) < 0) {
+      this.error = new_error;
+      this.bestPosition = ParticleSwarmOptimization.copy(this.position);
     }
 
     return this;
@@ -85,12 +76,11 @@ public class Particle implements Comparable<Particle> {
 
     for (int i = 0; i < this.position.length; i++) {
       this.position[i] = this.position[i].add(this.velocity[i]);
-
-      System.out.println(this + " x_" + i + "="
-          + this.position[i].round(MathContext.DECIMAL32));
     }
 
-    position = this.algo.clip(position);
+    if (!this.algo.isValid(this.position)) {
+      this.position = this.algo.clip(this.position);
+    }
 
     return this;
   }
@@ -98,5 +88,9 @@ public class Particle implements Comparable<Particle> {
   @Override
   public int compareTo(final Particle o) {
     return this.error.compareTo(o.error);
+  }
+
+  public BigDecimal[] getPosition() {
+    return this.position;
   }
 }

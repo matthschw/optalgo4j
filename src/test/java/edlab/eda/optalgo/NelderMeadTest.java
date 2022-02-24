@@ -12,6 +12,7 @@ import edlab.eda.optalgo.exceptions.NonMatchingDesignSpace;
 import edlab.eda.optalgo.testfuns.Himmelblau;
 import edlab.eda.optalgo.testfuns.Rastrigin;
 import edlab.eda.optalgo.testfuns.Rosenbrock;
+import edlab.eda.optalgo.testfuns.Sphere;
 
 class NelderMeadTest {
 
@@ -25,6 +26,7 @@ class NelderMeadTest {
     NelderMeadTest.himmelblau();
     NelderMeadTest.rastrigin();
     NelderMeadTest.rosenbrock();
+    NelderMeadTest.sphere();
   }
 
   public static void himmelblau() {
@@ -120,6 +122,39 @@ class NelderMeadTest {
           fail("No convergence for Rosenbrock in iteration " + i);
         } else if (VERBOSE) {
           System.out.println("\nResult for \"Rosenbrock\" achieved:");
+          for (int j = 0; j < nm.getResult().length; j++) {
+            System.out.println("x_" + j + "="
+                + nm.getResult()[j].round(MathContext.DECIMAL32));
+          }
+        }
+      } catch (final NonMatchingDesignSpace e) {
+        e.printStackTrace();
+      }
+    }
+  }
+  public static void sphere() {
+    final Sphere sphere = new Sphere(2);
+
+    NelderMead nm;
+    BigDecimal error;
+
+    for (int i = 0; i < NUM_OF_RUNS; i++) {
+
+      nm = new NelderMead(sphere);
+      nm.setVerbose(VERBOSE);
+      nm.setMaxError(ERROR);
+      nm.setNumOfMaxEvals(MAX_ITERATIONS);
+
+      nm.run();
+
+      try {
+
+        error = sphere.evaluate(nm.getResult());
+
+        if (error.compareTo(ERROR) > 0) {
+          fail("No convergence for Sphere in iteration " + i);
+        } else if (VERBOSE) {
+          System.out.println("\nResult for \"Sphere\" achieved:");
           for (int j = 0; j < nm.getResult().length; j++) {
             System.out.println("x_" + j + "="
                 + nm.getResult()[j].round(MathContext.DECIMAL32));

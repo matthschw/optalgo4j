@@ -12,6 +12,7 @@ import edlab.eda.optalgo.exceptions.NonMatchingDesignSpace;
 import edlab.eda.optalgo.testfuns.Himmelblau;
 import edlab.eda.optalgo.testfuns.Rastrigin;
 import edlab.eda.optalgo.testfuns.Rosenbrock;
+import edlab.eda.optalgo.testfuns.Sphere;
 
 class ParticleSwarmOptimizationTest {
 
@@ -26,6 +27,7 @@ class ParticleSwarmOptimizationTest {
     ParticleSwarmOptimizationTest.rosenbrock();
     ParticleSwarmOptimizationTest.rastrigin();
     ParticleSwarmOptimizationTest.himmelblau();
+    ParticleSwarmOptimizationTest.sphere();
   }
 
   private static void himmelblau() {
@@ -133,6 +135,46 @@ class ParticleSwarmOptimizationTest {
         } else if (VERBOSE) {
 
           System.out.println("\nResult for \"Rosenbrock\" achieved:");
+
+          for (int j = 0; j < pso.getResult().length; j++) {
+            System.out.println("x_" + j + "="
+                + pso.getResult()[j].round(MathContext.DECIMAL32));
+          }
+        }
+
+      } catch (final NonMatchingDesignSpace e) {
+        e.printStackTrace();
+      }
+    }
+  }
+  
+  private static void sphere() {
+
+    final Sphere sphere = new Sphere(2);
+
+    ParticleSwarmOptimization pso;
+    BigDecimal error;
+
+    for (int i = 0; i < NUM_OF_RUNS; i++) {
+
+      pso = new ParticleSwarmOptimization(sphere, MAX_EVALUATIONS,
+          NUM_OF_PARTICLES, ERROR);
+      pso.setVerbose(VERBOSE);
+
+      pso.run();
+
+      try {
+
+        error = sphere.evaluate(pso.getResult());
+
+        if (error.compareTo(ERROR) > 0) {
+
+          fail("No convergence for \"Sphere\" in iteration " + i
+              + " with error " + error.round(MathContext.DECIMAL32));
+
+        } else if (VERBOSE) {
+
+          System.out.println("\nResult for \"Sphere\" achieved:");
 
           for (int j = 0; j < pso.getResult().length; j++) {
             System.out.println("x_" + j + "="

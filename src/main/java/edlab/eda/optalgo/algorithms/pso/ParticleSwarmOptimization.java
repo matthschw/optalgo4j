@@ -72,11 +72,6 @@ public final class ParticleSwarmOptimization extends UnivariateOptimizer {
 
       if (retval.compareTo(this.error) < 0) {
 
-        if (this.verbose) {
-          System.out.println(
-              "Update best point : " + this.error.round(MathContext.DECIMAL32));
-        }
-
         this.result = ParticleSwarmOptimization.copy(position);
         this.error = retval;
       }
@@ -130,7 +125,11 @@ public final class ParticleSwarmOptimization extends UnivariateOptimizer {
     while ((this.error.compareTo(this.maxError) > 0)
         && (this.numOfEvals < this.maxNumOfEvals)) {
 
-      System.out.println(this.numOfEvals + "/" + this.maxNumOfEvals);
+      if (this.verbose) {
+        System.out
+            .println("Evaluations:" + this.numOfEvals + "/" + this.maxNumOfEvals
+                + " Error:" + this.error.round(MathContext.DECIMAL32));
+      }
 
       for (final Particle particle : this.particles) {
         particle.updateVelocity().updatePosition().evaluate();

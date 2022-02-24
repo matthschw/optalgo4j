@@ -10,7 +10,7 @@ public class Rosenbrock extends UnivariateFunction {
 
   public Rosenbrock(final int n) {
 
-    super(n);
+    super(n, "Rosenbrock");
 
     for (int i = 0; i < n; i++) {
       this.range[i] = ContinuousParameterRange
@@ -43,6 +43,5 @@ public class Rosenbrock extends UnivariateFunction {
     } else {
       throw new NonMatchingDesignSpace(vals.length, this.noOfInputs);
     }
-
   }
 }

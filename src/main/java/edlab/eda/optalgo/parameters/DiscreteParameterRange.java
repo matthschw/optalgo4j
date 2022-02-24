@@ -7,7 +7,6 @@ import edlab.eda.optalgo.exceptions.NoLowerAndUpperBoundedRange;
 
 /**
  * This class corresponds to a discrete parameter range
- *
  */
 public class DiscreteParameterRange extends ParameterRange {
 

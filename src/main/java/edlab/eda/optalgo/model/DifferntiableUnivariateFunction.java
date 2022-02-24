@@ -11,6 +11,10 @@ public abstract class DifferntiableUnivariateFunction
     super(noOfInputs);
   }
 
+  public DifferntiableUnivariateFunction(final int noOfInputs, String name) {
+    super(noOfInputs, name);
+  }
+
   public abstract BigDecimal[] gradient(BigDecimal[] vals)
       throws NonMatchingDesignSpace;
 

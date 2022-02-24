@@ -12,7 +12,7 @@ public class Rastrigin extends UnivariateFunction {
 
   public Rastrigin(final int n, final BigDecimal a) {
 
-    super(n);
+    super(n, "Rastrigin");
     this.a = a;
 
     for (int i = 0; i < n; i++) {

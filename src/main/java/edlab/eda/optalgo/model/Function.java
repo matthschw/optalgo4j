@@ -58,7 +58,7 @@ public abstract class Function {
       try {
         retval[i] = this.range[i].getRandomValue();
       } catch (final Exception e) {
-        throw new NoLowerAndUpperBoundedRange(i);
+        throw new NoLowerAndUpperBoundedRange(this, i);
       }
     }
 

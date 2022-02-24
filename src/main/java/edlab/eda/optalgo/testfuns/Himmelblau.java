@@ -10,7 +10,7 @@ public class Himmelblau extends UnivariateFunction {
 
   public Himmelblau() {
 
-    super(2);
+    super(2, "Himmelblau");
 
     for (int i = 0; i < 2; i++) {
       this.range[i] = ContinuousParameterRange
@@ -32,7 +32,6 @@ public class Himmelblau extends UnivariateFunction {
     }
 
   }
-
 
   /*
    * @Override public double[] gradient(double[] vals) throws

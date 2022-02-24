@@ -16,7 +16,20 @@ public abstract class MultivariateFunction extends Function {
     this.noOfOutputs = noOfOutputs;
   }
 
-  public abstract BigDecimal[] evaluate(BigDecimal[] vals)
-      throws NonMatchingDesignSpace;
+  public MultivariateFunction(int noOfInputs, int noOfOutputs, String name) {
+    super(noOfInputs, name);
+    this.noOfOutputs = noOfOutputs;
+  }
 
+  /**
+   * Get the number of output values of function
+   * 
+   * @return number of output values
+   */
+  public int getNoOfOutputs() {
+    return this.noOfOutputs;
+  }
+
+  public abstract BigDecimal[] evaluate(BigDecimal[] values)
+      throws NonMatchingDesignSpace;
 }

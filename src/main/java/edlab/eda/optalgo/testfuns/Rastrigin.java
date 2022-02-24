@@ -3,10 +3,10 @@ package edlab.eda.optalgo.testfuns;
 import java.math.BigDecimal;
 
 import edlab.eda.optalgo.exceptions.NonMatchingDesignSpace;
-import edlab.eda.optalgo.model.DifferntiableUnivariateFunction;
+import edlab.eda.optalgo.model.UnivariateFunction;
 import edlab.eda.optalgo.parameters.ContinuousParameterRange;
 
-public class Rastrigin extends DifferntiableUnivariateFunction {
+public class Rastrigin extends UnivariateFunction {
 
   private final BigDecimal a;
 
@@ -59,18 +59,4 @@ public class Rastrigin extends DifferntiableUnivariateFunction {
    * @Override public double[][] hessian(double[] vals) { double rtn[][] = new
    * double[this.noOfInputs][this.noOfInputs]; return rtn; }
    */
-
-  @Override
-  public BigDecimal[] gradient(final BigDecimal[] vals)
-      throws NonMatchingDesignSpace {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  public BigDecimal[][] hessian(final BigDecimal[] vals)
-      throws NonMatchingDesignSpace {
-    // TODO Auto-generated method stub
-    return null;
-  }
 }

@@ -8,6 +8,7 @@ public abstract class UnivariateOptimizer {
 
   public static final int MAX_NUM_OF_EVALS_DEFAULT = 500;
   public static final BigDecimal MAX_ERROR_DEFAULT = new BigDecimal("1e-3");
+  
   protected UnivariateFunction func;
   protected int maxNumOfEvals;
   protected int numOfEvals;
@@ -52,7 +53,7 @@ public abstract class UnivariateOptimizer {
     this.range = new ParameterRange[func.getNoOfInputs()];
   }
 
-  public UnivariateFunction getFunction() {
+  UnivariateFunction getFunction() {
     return this.func;
   }
 
@@ -60,8 +61,9 @@ public abstract class UnivariateOptimizer {
     return this.maxNumOfEvals;
   }
 
-  public void setNumOfMaxEvals(final int maxNumOfEvals) {
+  public UnivariateOptimizer setNumOfMaxEvals(final int maxNumOfEvals) {
     this.maxNumOfEvals = maxNumOfEvals;
+    return this;
   }
 
   public int getNumOfEvals() {
@@ -72,16 +74,18 @@ public abstract class UnivariateOptimizer {
     return this.result;
   }
 
-  public void setMaxError(final BigDecimal maxError) {
+  public UnivariateOptimizer setMaxError(final BigDecimal maxError) {
     this.maxError = maxError;
+    return this;
   }
 
   public BigDecimal getError() {
     return this.error;
   }
 
-  public void setVerbose(final boolean verbose) {
+  public UnivariateOptimizer setVerbose(final boolean verbose) {
     this.verbose = verbose;
+    return this;
   }
 
   public abstract UnivariateOptimizer run();

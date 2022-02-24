@@ -130,6 +130,8 @@ public final class ParticleSwarmOptimization extends UnivariateOptimizer {
     while ((this.error.compareTo(this.maxError) > 0)
         && (this.numOfEvals < this.maxNumOfEvals)) {
 
+      System.out.println(this.numOfEvals + "/" + this.maxNumOfEvals);
+
       for (final Particle particle : this.particles) {
         particle.updateVelocity().updatePosition().evaluate();
       }

@@ -3,10 +3,10 @@ package edlab.eda.optalgo.testfuns;
 import java.math.BigDecimal;
 
 import edlab.eda.optalgo.exceptions.NonMatchingDesignSpace;
-import edlab.eda.optalgo.model.DifferntiableUnivariateFunction;
+import edlab.eda.optalgo.model.UnivariateFunction;
 import edlab.eda.optalgo.parameters.ContinuousParameterRange;
 
-public class Himmelblau extends DifferntiableUnivariateFunction {
+public class Himmelblau extends UnivariateFunction {
 
   public Himmelblau() {
 
@@ -33,19 +33,6 @@ public class Himmelblau extends DifferntiableUnivariateFunction {
 
   }
 
-  @Override
-  public BigDecimal[] gradient(final BigDecimal[] vals)
-      throws NonMatchingDesignSpace {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  public BigDecimal[][] hessian(final BigDecimal[] vals)
-      throws NonMatchingDesignSpace {
-    // TODO Auto-generated method stub
-    return null;
-  }
 
   /*
    * @Override public double[] gradient(double[] vals) throws

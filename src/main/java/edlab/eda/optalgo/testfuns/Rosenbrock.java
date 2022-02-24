@@ -3,10 +3,10 @@ package edlab.eda.optalgo.testfuns;
 import java.math.BigDecimal;
 
 import edlab.eda.optalgo.exceptions.NonMatchingDesignSpace;
-import edlab.eda.optalgo.model.DifferntiableUnivariateFunction;
+import edlab.eda.optalgo.model.UnivariateFunction;
 import edlab.eda.optalgo.parameters.ContinuousParameterRange;
 
-public class Rosenbrock extends DifferntiableUnivariateFunction {
+public class Rosenbrock extends UnivariateFunction {
 
   public Rosenbrock(final int n) {
 
@@ -44,19 +44,5 @@ public class Rosenbrock extends DifferntiableUnivariateFunction {
       throw new NonMatchingDesignSpace(vals.length, this.noOfInputs);
     }
 
-  }
-
-  @Override
-  public BigDecimal[] gradient(final BigDecimal[] vals)
-      throws NonMatchingDesignSpace {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  public BigDecimal[][] hessian(final BigDecimal[] vals)
-      throws NonMatchingDesignSpace {
-    // TODO Auto-generated method stub
-    return null;
   }
 }

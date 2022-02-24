@@ -12,6 +12,8 @@ public class Particle implements Comparable<Particle> {
   private BigDecimal[] bestPosition;
   private BigDecimal error;
 
+  private int outside = 0;
+
   Particle(final ParticleSwarmOptimization algo, final BigDecimal[] position,
       final BigDecimal[] velocity) {
     this.algo = algo;
@@ -41,12 +43,12 @@ public class Particle implements Comparable<Particle> {
     BigDecimal elem2;
 
     BigDecimal r1, r2;
-    
+
     r1 = new BigDecimal(Math.random());
     r2 = new BigDecimal(Math.random());
 
     for (int i = 0; i < this.velocity.length; i++) {
-      
+
       elem1 = this.bestPosition[i].subtract(this.position[i])
           .multiply(this.algo.getCognitive()).multiply(r1);
 
@@ -78,8 +80,20 @@ public class Particle implements Comparable<Particle> {
       this.position[i] = this.position[i].add(this.velocity[i]);
     }
 
-    if (!this.algo.isValid(this.position)) {
+    if (this.algo.isValid(this.position)) {
+
+      this.outside = 0;
+
+    } else {
+
+      this.outside++;
       this.position = this.algo.clip(this.position);
+
+      if (this.outside > 5) {
+        if (Math.random() > 0.9) {
+          this.position = this.algo.getRandomPosition();
+        }
+      }
     }
 
     return this;

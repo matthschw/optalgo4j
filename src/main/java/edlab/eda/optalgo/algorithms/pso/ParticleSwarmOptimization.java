@@ -36,6 +36,14 @@ public final class ParticleSwarmOptimization extends UnivariateOptimizer {
     this.numOfParticles = numOfParticles;
   }
 
+  BigDecimal[] getRandomPosition() {
+    try {
+      return this.func.getRandomPosition();
+    } catch (NoLowerAndUpperBoundedRange e) {
+      return null;
+    }
+  }
+
   private ParticleSwarmOptimization init() {
 
     Particle particle;
@@ -66,7 +74,7 @@ public final class ParticleSwarmOptimization extends UnivariateOptimizer {
 
         if (this.verbose) {
           System.out.println(
-              "Update best point :" + this.error.round(MathContext.DECIMAL32));
+              "Update best point : " + this.error.round(MathContext.DECIMAL32));
         }
 
         this.result = ParticleSwarmOptimization.copy(position);

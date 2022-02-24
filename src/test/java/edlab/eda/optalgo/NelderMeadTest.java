@@ -1,4 +1,4 @@
-package edlab.eda.optalgo.algorithms;
+package edlab.eda.optalgo;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -7,6 +7,7 @@ import java.math.MathContext;
 
 import org.junit.jupiter.api.Test;
 
+import edlab.eda.optalgo.algorithms.NelderMead;
 import edlab.eda.optalgo.exceptions.NonMatchingDesignSpace;
 import edlab.eda.optalgo.testfuns.Himmelblau;
 import edlab.eda.optalgo.testfuns.Rastrigin;

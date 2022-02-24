@@ -9,13 +9,13 @@ import edlab.eda.optalgo.exceptions.NonMatchingDesignSpace;
 import edlab.eda.optalgo.model.UnivariateFunction;
 import edlab.eda.optalgo.model.UnivariateOptimizer;
 
-public class ParticleSwarmOptimization extends UnivariateOptimizer {
+public final class ParticleSwarmOptimization extends UnivariateOptimizer {
 
   private ArrayList<Particle> particles = new ArrayList<>();
 
-  private final BigDecimal momentum = new BigDecimal("0.75");
-  private final BigDecimal cognitive = new BigDecimal("1.5");
-  private final BigDecimal social = new BigDecimal("2.0");
+  private BigDecimal momentum = new BigDecimal("0.75");
+  private BigDecimal cognitive = new BigDecimal("1.5");
+  private BigDecimal social = new BigDecimal("2.0");
 
   private BigDecimal error = new BigDecimal(Double.MAX_VALUE);
 

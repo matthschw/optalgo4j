@@ -1,4 +1,4 @@
-package edlab.eda.optalgo.algorithms;
+package edlab.eda.optalgo;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
